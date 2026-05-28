@@ -1,0 +1,6 @@
+{
+  "name": "BIP39 Offline Vault",
+  "description": "Open-source offline generator and secure vault for BIP39 Seed Phrases",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
