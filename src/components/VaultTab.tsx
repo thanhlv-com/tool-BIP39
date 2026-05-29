@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { Lock, Unlock, Trash2, Eye, Copy, RefreshCw, EyeOff } from "lucide-react";
 import { VaultItem, loadVault, getHasVault, updateVaultWhole } from "../lib/vault";
 
@@ -11,7 +11,7 @@ export function VaultTab() {
 
   const hasVaultOnInit = getHasVault();
 
-  const handleUnlock = (e?: React.FormEvent) => {
+  const handleUnlock = (e?: FormEvent) => {
     e?.preventDefault();
     if (!password) return;
     
