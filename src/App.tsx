@@ -5,7 +5,6 @@ import { VaultTab } from "./components/VaultTab";
 import { NavLink, Routes, Route, Navigate } from "react-router-dom";
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabType>("generator");
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans pb-16">
