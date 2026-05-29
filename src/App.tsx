@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { ShieldAlert, Github, Wallet, Database } from "lucide-react";
-import { TabType } from "./types";
 import { cn } from "./lib/utils";
 import { GeneratorTab } from "./components/GeneratorTab";
 import { VaultTab } from "./components/VaultTab";
+import { NavLink, Routes, Route, Navigate } from "react-router-dom";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>("generator");
@@ -54,36 +53,41 @@ export default function App() {
 
         {/* Navigation Tabs */}
         <div className="flex items-center p-1 bg-slate-100 border border-slate-200 rounded-lg w-fit mx-auto sm:mx-0 mb-8 shadow-sm">
-          <button
-            onClick={() => setActiveTab("generator")}
-            className={cn(
-              "flex items-center gap-2 px-5 py-2.5 text-sm font-bold rounded-md transition-all",
-              activeTab === "generator" 
-                ? "bg-white text-slate-900 shadow-sm" 
-                : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
-            )}
+          <NavLink
+            to="/generate"
+            className={({ isActive }) =>
+              cn(
+                "flex items-center gap-2 px-5 py-2.5 text-sm font-bold rounded-md transition-all",
+                isActive ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
+              )
+            }
           >
             <Wallet className="w-4 h-4" />
             Generate Phrase
-          </button>
+          </NavLink>
           
-          <button
-            onClick={() => setActiveTab("vault")}
-            className={cn(
-              "flex items-center gap-2 px-5 py-2.5 text-sm font-bold rounded-md transition-all",
-              activeTab === "vault" 
-                ? "bg-white text-slate-900 shadow-sm" 
-                : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
-            )}
+          <NavLink
+            to="/vault"
+            className={({ isActive }) =>
+              cn(
+                "flex items-center gap-2 px-5 py-2.5 text-sm font-bold rounded-md transition-all",
+                isActive ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
+              )
+            }
           >
             <Database className="w-4 h-4" />
             Local Vault
-          </button>
+          </NavLink>
         </div>
 
         {/* Tab Content */}
         <div className="min-h-[400px]">
-          {activeTab === "generator" ? <GeneratorTab /> : <VaultTab />}
+          <Routes>
+            <Route path="/generate" element={<GeneratorTab />} />
+            <Route path="/vault" element={<VaultTab />} />
+            <Route path="/" element={<Navigate to="/generate" replace />} />
+            <Route path="*" element={<Navigate to="/generate" replace />} />
+          </Routes>
         </div>
       </main>
     </div>
